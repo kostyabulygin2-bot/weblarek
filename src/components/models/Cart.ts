@@ -11,7 +11,7 @@ export class Cart {
     return this.items;
   }
 
-  addItems(product: IProduct): void {
+  addItem(product: IProduct): void {
     this.items.push(product)
   }
 
@@ -37,5 +37,7 @@ export class Cart {
     return this.items.length;
   }
 
-  
+   hasItem(id:string): boolean {
+    return this.items.some(item => item.id === id)
+  }
 }

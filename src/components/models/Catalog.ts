@@ -9,8 +9,8 @@ export class Catalog {
     this.selectedProduct = null;
   }
 
-  setItems(products: IProduct[]): void {
-    this.items = products;
+  setItems(items: IProduct[]): void {
+    this.items = items;
   }
 
   getItems(): IProduct[] {
@@ -29,7 +29,4 @@ export class Catalog {
     return this.selectedProduct;
   }
 
-  hasItem(id:string): boolean {
-    return this.items.some(item => item.id === id)
-  }
 }

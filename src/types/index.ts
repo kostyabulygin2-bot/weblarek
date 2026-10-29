@@ -29,3 +29,21 @@ export interface ValidationErrors {
   phone?: string;
   email?: string;
 }
+
+// Тип для ответа сервера с товарами
+export interface IProductList {
+  total: number;
+  items: IProduct[];
+}
+
+// Тип для описания ответа сервера при оформлении заказа
+export interface IResponseOrder {
+  id: string;
+  total: number;
+}
+
+// Интерфейс для данных запроса на сервер при оформлении заказа
+export interface IRequestData extends IBuyer {
+  total: number;
+  items: string[];
+}
