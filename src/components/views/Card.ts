@@ -1,0 +1,25 @@
+import { Component } from "../base/Component";
+import { ensureElement } from "../../utils/utils";
+import { IProduct } from "../../types";
+
+export type TCard = Pick<IProduct, 'title'|'price'>
+
+export abstract class Card<T extends TCard> extends Component<T> {
+  protected titleElement: HTMLElement;
+  protected priceElement: HTMLElement;
+
+  constructor(container: HTMLElement) {
+    super(container);
+
+    this.titleElement = ensureElement<HTMLElement>('.card__title', this.container);
+    this.priceElement = ensureElement<HTMLElement>('.card__price', this.container);
+  }
+
+  protected set title(value: string) {
+    this.titleElement.textContent = value;
+  }
+
+  protected set price(value: number | null) {
+    this.priceElement.textContent = value === null? `Бесценно`: `${value} синапсов`;
+  }
+}

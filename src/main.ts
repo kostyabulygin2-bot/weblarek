@@ -65,26 +65,11 @@ console.log("Данные после очистки", buyer.getData());
 // Запрос на сервер
 const api = new Api(API_URL);
 const larekApi = new LarekApi(api);
-console.log("Загрузка товаров с сервера");
+
+// Загрузка товаров с каталога
 larekApi.getProductList()
-  .then((productsResponse) => {
-    catalog.setItems(productsResponse.items);
-
-    // ПРОВЕРКА ДАННЫХ КАТАЛОГА
-    console.log('ПРОВЕРКА ДАННЫХ КАТАЛОГА');
-
-    // 1. Выводим сохранённый каталог
-    console.log("Массив товаров из каталога после выполнения запроса с сервера: ", catalog.getItems());
-
-    // 2. Выводим общее количество товаров
-    const catalogItems = catalog.getItems();
-    console.log("Количество товаров в каталоге после сохранения:", catalogItems.length);
-
-    // 3. Выводим первый товар для проверки структуры
-    if (catalogItems.length > 0) {
-      const firstItem = catalog.getItems()[0];
-      console.log("Первый товар в каталоге по id", catalog.getItemById(firstItem.id));
-    }
+  .then((data) => {
+    catalog.setItems(data.items);
   })
   .catch((error: Error) => {
     console.error("Ошибка при загрузке товаров с сервера:", error);

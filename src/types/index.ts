@@ -14,7 +14,7 @@ export interface IProduct {
   price: number | null;
 }
 
-type TPayment = 'card' | 'cash';
+export type TPayment = 'card' | 'cash';
 
 export interface IBuyer {
   payment: TPayment | null;
@@ -46,4 +46,9 @@ export interface IResponseOrder {
 export interface IRequestData extends IBuyer {
   total: number;
   items: string[];
+}
+
+// Обработчик действия пользователя на карточке.
+export interface ICardActions {
+  onClick: () => void;
 }
