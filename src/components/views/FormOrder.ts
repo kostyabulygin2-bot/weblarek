@@ -1,7 +1,7 @@
 import { Form, IForm } from "./Form";
 import { IEvents } from "../base/Events";
 import { ensureElement } from "../../utils/utils";
-import { IBuyer, TPayment } from "../../types";
+import { IBuyer, TFormMod, TPayment } from "../../types";
 
 export type TFormOrder = IForm & Pick<IBuyer, 'payment' | 'address'>
 
@@ -10,7 +10,7 @@ export class FormOrder extends Form<TFormOrder> {
   protected buttonCash: HTMLButtonElement;
   protected inputAddress: HTMLInputElement;
 
-  constructor(protected events: IEvents, container: HTMLElement) {
+  constructor(protected events: IEvents, container: HTMLFormElement) {
     super(events, container);
 
     this.buttonCard = ensureElement<HTMLButtonElement>('button[name="card"]', this.container);
@@ -18,15 +18,15 @@ export class FormOrder extends Form<TFormOrder> {
     this.inputAddress = ensureElement<HTMLInputElement>('input[name="address"]', this.container);
 
     this.buttonCard.addEventListener('click', () => {
-      this.events.emit('form:change', {payment: 'card'})
+      this.events.emit<TFormMod>('form:change', {payment: 'card'})
     })
 
     this.buttonCash.addEventListener('click', () => {
-      this.events.emit('form:change', {payment: 'cash'})
+      this.events.emit<TFormMod>('form:change', {payment: 'cash'})
     })
 
     this.inputAddress.addEventListener('input', () => {
-      this.events.emit('form:change', {address: this.inputAddress.value})
+      this.events.emit<TFormMod>('form:change', {address: this.inputAddress.value})
     })
   }
 

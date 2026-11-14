@@ -3,7 +3,7 @@ import { ensureElement } from "../../utils/utils";
 import { IEvents } from "../base/Events";
 
 export interface IForm {
-  validButton: boolean;
+  valid: boolean;
   errors: string;
 }
 
@@ -11,19 +11,19 @@ export abstract class Form<T extends IForm> extends Component<T> {
   protected submitElement: HTMLButtonElement;
   protected formErrors: HTMLElement;
 
-  constructor(protected events: IEvents, container: HTMLElement) {
+  constructor(protected events: IEvents, container: HTMLFormElement) {
     super(container);
 
-    this.submitElement = ensureElement<HTMLButtonElement>('.button', this.container);
-    this.formErrors = ensureElement<HTMLElement>('form__errors', this.container);
+    this.submitElement = ensureElement<HTMLButtonElement>('button[type="submit"]', this.container);
+    this.formErrors = ensureElement<HTMLElement>('.form__errors', this.container);
 
     this.submitElement.addEventListener('submit', (event) => {
       event.preventDefault();
-      this.events.emit('form:submit')
+      this.events.emit(`${container.name}:submit`)
     })
   }
 
-  set validButton(value: boolean) {
+  set valid(value: boolean) {
     this.submitElement.disabled = !value;
   }
 

@@ -17,7 +17,7 @@ export class Header extends Component<IHeader> {
     this.busketButton = ensureElement<HTMLButtonElement>('.header__basket', this.container);
 
     this.busketButton.addEventListener('click', () => {
-      this.events.emit('busket:open');
+      this.events.emit('basket:open');
     })
   }
 

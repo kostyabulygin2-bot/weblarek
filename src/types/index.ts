@@ -52,3 +52,6 @@ export interface IRequestData extends IBuyer {
 export interface ICardActions {
   onClick: () => void;
 }
+
+// Тип для форм
+export type TFormMod = Partial<IBuyer>;

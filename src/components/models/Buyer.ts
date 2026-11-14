@@ -1,10 +1,11 @@
 import { IBuyer } from "../../types";
 import { ValidationErrors } from "../../types";
+import { IEvents } from "../base/Events";
 
 export class Buyer {
   private data: IBuyer;
 
-  constructor() {
+  constructor(protected events: IEvents) {
     this.data = {
       payment: null,
       address: '',
@@ -17,7 +18,9 @@ export class Buyer {
     this.data = {
       ...this.data,
       ...partialData
-    }
+    };
+
+    this.events.emit('buyer: changed');
   }
 
   getData(): IBuyer {
@@ -33,6 +36,8 @@ export class Buyer {
       phone: '',
       email: ''
     };
+
+    this.events.emit('buyer:changed');
   }
 
   validate(): ValidationErrors {
