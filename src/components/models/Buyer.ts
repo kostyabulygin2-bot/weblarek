@@ -49,14 +49,10 @@ export class Buyer {
 
     if (!this.data.phone.trim()) {
       errors.phone = "Введите телефон";
-    } else if (!/^\+?[\d\s()-]{10,20}$/.test(this.data.phone.trim())) {
-      errors.phone = "Введите корректный номер телефона";
     }
 
     if (!this.data.email.trim()) {
       errors.email = "Укажите email";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(this.data.email.trim())) {
-      errors.email = "Введите корректный email";
     }
 
     if (this.data.payment === null) {
