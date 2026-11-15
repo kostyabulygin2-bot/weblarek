@@ -2,7 +2,9 @@ import { Component } from "../base/Component";
 import { ensureElement } from "../../utils/utils";
 import { IProduct } from "../../types";
 
-export type TCard = Pick<IProduct, 'title'|'price'>
+export type TCard = Pick<IProduct, 'title'|'price'> & {
+  imageAlt?: string;
+};
 
 export abstract class Card<T extends TCard> extends Component<T> {
   protected titleElement: HTMLElement;

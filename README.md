@@ -101,8 +101,18 @@ Presenter - презентер содержит основную логику п
 ### Данные
 
 Интерфейс товара: interface IProduct { id: string; description: string; image: string; title: string; category: string; price: number | null; }
+id - уникальный идентификатор продукта;
+description - описание продукта;
+image - изображение продукта;
+title - название продукта;
+category - категория продукта;
+price - цена продукта (товар может быть бесценным).
 
 Интерфейс покупателя: interface Buyer { payment: TPayment | null; email: string; phone: string; address: string; }
+payment - способ оплаты для покупателя;
+email - электронная почта покупателя;
+phone - номер телефона покупателя;
+address - адрес покупателя.
 
 ### Модели данных (Modal)
 

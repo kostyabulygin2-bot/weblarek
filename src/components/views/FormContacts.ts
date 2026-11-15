@@ -18,7 +18,7 @@ export class FormContacts extends Form<TFormContacts> {
     this.inputEmail.addEventListener('input', () => {
       this.events.emit<TFormMod>('form:change', {email: this.inputEmail.value})
     })
-    this.inputEmail.addEventListener('input', () => {
+    this.inputPhone.addEventListener('input', () => {
       this.events.emit<TFormMod>('form:change', {phone: this.inputPhone.value})
     })
   }

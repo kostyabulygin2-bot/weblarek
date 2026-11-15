@@ -4,7 +4,7 @@ import { Cart } from "./components/models/Cart";
 import { Buyer } from "./components/models/Buyer";
 import { LarekApi } from "./components/models/LarekApi";
 import { Api } from "./components/base/Api";
-import { API_URL } from "./utils/constants";
+import { API_URL, CDN_URL } from "./utils/constants";
 import { cloneTemplate, ensureElement } from "./utils/utils";
 import { EventEmitter } from "./components/base/Events";
 import { Header } from "./components/views/Header";
@@ -107,6 +107,7 @@ events.on('catalog:changed', () => {
             title: item.title,
             price: item.price,
             image: item.image,
+            imageAlt: item.title,
             category: item.category,
         });
     });
@@ -141,7 +142,7 @@ events.on('preview:changed', () => {
 });
 
 // Изменение содержимого корзины
-events.on('basket:changed', () => {
+events.on('cart:changed', () => {
     header.render({ counter: cart.getCountItems() });
     basketView.render(getBasketData());
 });
@@ -225,14 +226,14 @@ events.on('success:close', () => {
     modal.close();
 });
 
-// События моделей выполнят начальный рендер счётчика, корзины и форм
-cart.clearCart();
-buyer.clearData();
-
 // Загрузка товаров с каталога
 larekApi.getProductList()
-  .then((data) => {
-    catalog.setItems(data.items);
+  .then((products) => {
+    products.items.forEach((product) => {
+      product.image = CDN_URL + product.image;
+    });
+
+    catalog.setItems(products.items);
   })
   .catch((error: Error) => {
     console.error("Ошибка при загрузке товаров с сервера:", error);

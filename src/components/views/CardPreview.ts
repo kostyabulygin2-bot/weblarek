@@ -40,8 +40,12 @@ export class CardPreview extends Card<TCardPreviw> {
     }
   }
 
-  set image(value: string){
-    this.setImage(this.imageElement, CDN_URL + value, this.title);
+  set image(value: string) {
+    this.setImage(this.imageElement, value, '');
+  }
+
+  set imageAlt(value: string) {
+    this.imageElement.alt = value;
   }
 
   set description(value: string) {

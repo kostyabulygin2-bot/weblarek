@@ -17,7 +17,7 @@ export abstract class Form<T extends IForm> extends Component<T> {
     this.submitElement = ensureElement<HTMLButtonElement>('button[type="submit"]', this.container);
     this.formErrors = ensureElement<HTMLElement>('.form__errors', this.container);
 
-    this.submitElement.addEventListener('submit', (event) => {
+    this.container.addEventListener('submit', (event) => {
       event.preventDefault();
       this.events.emit(`${container.name}:submit`)
     })
